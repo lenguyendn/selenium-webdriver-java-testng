@@ -6,15 +6,15 @@ import org.testng.annotations.Test;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.AfterClass;
 
-public class Topic_01_Check_Enviroment {
-  WebDriver driver;
+public class Topic_01_Check_Environment {
+  WebDriver driver ;
 	
   @BeforeClass
   public void beforeClass() {
-	  // mo trinh duyet
+	  // mở trình duyệt
 	  driver = new FirefoxDriver();
 	  
-	  // mo app
+	  // mở app
 	  driver.get("https://google.com");
   }
   
