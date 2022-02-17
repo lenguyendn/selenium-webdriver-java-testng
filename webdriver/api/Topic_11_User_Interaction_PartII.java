@@ -29,7 +29,7 @@ public class Topic_11_User_Interaction_PartII {
 	WebDriver driver;
 	Actions action;
 	JavascriptExecutor jsExecuter;
-	String javascriptPath,jqueryPath;
+	String javascriptPath, jqueryPath;
 
 	@BeforeClass
 	public void beforeClass() {
@@ -52,20 +52,22 @@ public class Topic_11_User_Interaction_PartII {
 		action.contextClick(driver.findElement(By.xpath("//span[@class='context-menu-one btn btn-neutral']")))
 				.perform();
 
-		//Verify Quick display before hover
-		Assert.assertTrue(
-				driver.findElement(By.cssSelector(".context-menu-icon-quit")).isDisplayed());
-		
+		// Verify Quick display before hover
+		Assert.assertTrue(driver.findElement(By.cssSelector(".context-menu-icon-quit")).isDisplayed());
+
 		// hover on Quick
 		action.moveToElement(driver.findElement(By.cssSelector(".context-menu-icon-quit"))).perform();
 		sleepInSeconds(1);
 
 		// verify Quick has (visible +hover)
 		Assert.assertTrue(
-				driver.findElement(By.cssSelector(".context-menu-icon-quit.context-menu-visible.context-menu-hover")).isDisplayed());
-		
+				driver.findElement(By.cssSelector(".context-menu-icon-quit.context-menu-visible.context-menu-hover"))
+						.isDisplayed());
+
 		// Click on Quick
-		action.click(driver.findElement(By.cssSelector(".context-menu-icon-quit.context-menu-visible.context-menu-hover"))).perform();
+		action.click(
+				driver.findElement(By.cssSelector(".context-menu-icon-quit.context-menu-visible.context-menu-hover")))
+				.perform();
 		sleepInSeconds(1);
 
 		// Verify clicked quit
@@ -97,13 +99,13 @@ public class Topic_11_User_Interaction_PartII {
 	public void TC_03_Drag_And_Drop_HTML5_Css() throws IOException {
 		driver.get("https://automationfc.github.io/drag-drop-html5/");
 		sleepInSeconds(1);
-		
+
 		String sourceCss = "#column-a";
 		String targetCss = "#column-b";
 
 		String java_script = readFileContent(javascriptPath);
 
-		//Khong can vi page dang test da co jquery
+		// Khong can vi page dang test da co jquery
 		// Inject Jquery lib to site
 		// String jqueryscript = readFileContent(jqueryPath);
 		// javascriptExecutor.executeScript(jqueryscript);
@@ -119,25 +121,25 @@ public class Topic_11_User_Interaction_PartII {
 		sleepInSeconds(3);
 		Assert.assertTrue(driver.findElement(By.xpath("//div[@id='column-b']/header[text()='B']")).isDisplayed());
 	}
-	
+
 	@Test
 	public void TC_04_Drag_And_Drop_HTML5_xpath() throws AWTException {
 		driver.get("https://automationfc.github.io/drag-drop-html5/");
 		sleepInSeconds(1);
-		
+
 		String sourceXpath = "//div[@id='column-a']";
 		String targetXpath = "//div[@id='column-b']";
-		
+
 		drag_the_and_drop_html5_by_xpath(sourceXpath, targetXpath);
 		sleepInSeconds(3);
 		Assert.assertTrue(driver.findElement(By.xpath("//div[@id='column-a']/header[text()='B']")).isDisplayed());
-		
+
 		drag_the_and_drop_html5_by_xpath(sourceXpath, targetXpath);
 		sleepInSeconds(3);
 		Assert.assertTrue(driver.findElement(By.xpath("//div[@id='column-b']/header[text()='B']")).isDisplayed());
-		
-		//chi pass khi screen scale 100%
-		
+
+		// chi pass khi screen scale 100%
+
 	}
 
 	public String convertColorGrbaToHex(String grba) {
@@ -156,7 +158,7 @@ public class Topic_11_User_Interaction_PartII {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public String readFileContent(String file) throws IOException {
 		Charset cs = Charset.forName("UTF-8");
 		FileInputStream stream = new FileInputStream(file);
@@ -213,7 +215,8 @@ public class Topic_11_User_Interaction_PartII {
 		// Click and drag
 		robot.mousePress(InputEvent.BUTTON1_MASK);
 		robot.mousePress(InputEvent.BUTTON1_MASK);
-		robot.mouseMove(((sourceLocation.x - targetLocation.x) / 2) + targetLocation.x, ((sourceLocation.y - targetLocation.y) / 2) + targetLocation.y);
+		robot.mouseMove(((sourceLocation.x - targetLocation.x) / 2) + targetLocation.x,
+				((sourceLocation.y - targetLocation.y) / 2) + targetLocation.y);
 
 		// Move to final position
 		robot.mouseMove(targetLocation.x, targetLocation.y);
@@ -221,7 +224,7 @@ public class Topic_11_User_Interaction_PartII {
 		// Drop
 		robot.mouseRelease(InputEvent.BUTTON1_MASK);
 	}
-	
+
 	@AfterClass
 	public void afterClass() {
 		driver.quit();

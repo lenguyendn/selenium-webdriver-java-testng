@@ -39,7 +39,8 @@ public class Topic_09_Button_Checkbox_Radio_Button {
 		driver.findElement(By.id("login_password")).sendKeys("123456");
 		Assert.assertTrue(driver.findElement(loginButton).isEnabled());
 		sleepInSeconds(2);
-		Assert.assertEquals(convertColorGrbaToHex(driver.findElement(loginButton).getCssValue("background-color")), "#c92127");
+		Assert.assertEquals(convertColorGrbaToHex(driver.findElement(loginButton).getCssValue("background-color")),
+				"#c92127");
 
 		driver.navigate().refresh();
 		driver.findElement(By.xpath("//a[text()='Đăng nhập']")).click();
@@ -63,11 +64,12 @@ public class Topic_09_Button_Checkbox_Radio_Button {
 		driver.findElement(By.id("onetrust-accept-btn-handler")).click();
 		sleepInSeconds(1);
 		WebElement DualZonecheckbox = driver.findElement(By.id("eq5"));
-		//jsExecutor.executeScript("arguments[0].click();", DualZonecheckbox); //trick bằng click js, không quan tâm element ẩn hay hiện
+		// jsExecutor.executeScript("arguments[0].click();", DualZonecheckbox); //trick
+		// bằng click js, không quan tâm element ẩn hay hiện
 		selectCheckboxOrRadioButton(DualZonecheckbox);
 		Assert.assertTrue(DualZonecheckbox.isSelected());
 		deselectCheckbox(DualZonecheckbox);
-		//jsExecutor.executeScript("arguments[0].click();", DualZonecheckbox);
+		// jsExecutor.executeScript("arguments[0].click();", DualZonecheckbox);
 		Assert.assertFalse(DualZonecheckbox.isSelected());
 
 		driver.get("https://demos.telerik.com/kendo-ui/radiobutton/index");
@@ -82,25 +84,28 @@ public class Topic_09_Button_Checkbox_Radio_Button {
 	@Test
 	public void TC_03_Custom_Radio_Checkbox() {
 		driver.get("https://material.angular.io/components/radio/examples");
-		//dùng click của JS vừa click vừa có thể verify với thẻ input
+		// dùng click của JS vừa click vừa có thể verify với thẻ input
 		By Spring = By.xpath("//input[@value='Spring']");
 		clickByJS(Spring);
 		sleepInSeconds(2);
 		Assert.assertTrue(driver.findElement(Spring).isSelected());
-		
+
 	}
 
 	@Test
 	public void TC_04_CustomII() {
-		driver.get("https://docs.google.com/forms/d/e/1FAIpQLSfiypnd69zhuDkjKgqvpID9kwO29UCzeCVrGGtbNPZXQok0jA/viewform");
-		//không có thẻ input để verify => tìm sự khác nhau trong attribute
-		//before click
-		Assert.assertTrue(driver.findElement(By.xpath("//div[@data-value='Cần Thơ' and @aria-checked='false']")).isDisplayed());
-		
+		driver.get(
+				"https://docs.google.com/forms/d/e/1FAIpQLSfiypnd69zhuDkjKgqvpID9kwO29UCzeCVrGGtbNPZXQok0jA/viewform");
+		// không có thẻ input để verify => tìm sự khác nhau trong attribute
+		// before click
+		Assert.assertTrue(
+				driver.findElement(By.xpath("//div[@data-value='Cần Thơ' and @aria-checked='false']")).isDisplayed());
+
 		driver.findElement(By.xpath("//div[@data-value='Cần Thơ']")).click();
-		
-		//After click
-		Assert.assertTrue(driver.findElement(By.xpath("//div[@data-value='Cần Thơ' and @aria-checked='true']")).isDisplayed());
+
+		// After click
+		Assert.assertTrue(
+				driver.findElement(By.xpath("//div[@data-value='Cần Thơ' and @aria-checked='true']")).isDisplayed());
 	}
 
 	public void sleepInSeconds(long timeout) {
@@ -133,19 +138,19 @@ public class Topic_09_Button_Checkbox_Radio_Button {
 			element.click();
 		}
 	}
-	
+
 	public void clickByJS(By by) {
 		WebElement element = driver.findElement(by);
 		jsExecutor.executeScript("arguments[0].click();", element);
 	}
-	
-	 public String convertColorGrbaToHex(String grba) {
-		  return Color.fromString(grba).asHex();
-	  }
-	  
-	  public String convertColorHexToGrba(String hex) {
-		  return Color.fromString(hex).asRgba();
-	  }
+
+	public String convertColorGrbaToHex(String grba) {
+		return Color.fromString(grba).asHex();
+	}
+
+	public String convertColorHexToGrba(String hex) {
+		return Color.fromString(hex).asRgba();
+	}
 
 	@AfterClass
 	public void afterClass() {

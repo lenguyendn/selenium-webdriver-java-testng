@@ -8,30 +8,30 @@ import org.testng.annotations.Test;
 
 public class Topic_01_Check_Environment {
 	WebDriver driver;
-	
+
 	@BeforeClass
 	public void beforeClass() {
 		driver = new FirefoxDriver();
-		//mo trinh duyet
-		driver.get("https://google.com");	
-		
+		// mo trinh duyet
+		driver.get("https://google.com");
+
 	}
-	
+
 	@Test
 	public void TC_01() {
-		
+
 	}
-	
+
 	@Test
 	public void TC_02() {
-		
+
 	}
-	
+
 	@Test
 	public void TC_03() {
-		
+
 	}
-	
+
 	@AfterClass
 	public void afterClass() {
 		driver.quit();

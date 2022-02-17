@@ -21,10 +21,11 @@ public class Topic_08_Dropdown_Custom {
 	WebDriverWait explicitWait;
 	JavascriptExecutor jsExecutor;
 	String projectLocation = System.getProperty("user.dir");
-	String[] threeMonths= {"January", "March", "May"};
-	String[] fourMonths= {"February", "December", "November", "August"};
-	String[] twelthMonths = {"January", "March", "May", "February", "December", "November", "August", "April", "June", "July", "October", "September"};
-	String[] wrongmonths = {"Januari", "Morch", "Mey"};
+	String[] threeMonths = { "January", "March", "May" };
+	String[] fourMonths = { "February", "December", "November", "August" };
+	String[] twelthMonths = { "January", "March", "May", "February", "December", "November", "August", "April", "June",
+			"July", "October", "September" };
+	String[] wrongmonths = { "Januari", "Morch", "Mey" };
 
 	@BeforeClass
 	public void beforeClass() {
@@ -34,11 +35,10 @@ public class Topic_08_Dropdown_Custom {
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		explicitWait = new WebDriverWait(driver, 15);
 		driver.manage().window().maximize();
-		
 
 	}
 
-	 @Test
+	@Test
 	public void TC_01_JQuery() {
 		driver.get("https://jqueryui.com/resources/demos/selectmenu/default.html");
 		selectCustomDropdownbyText("//span[@id='number-button']", "//ul[@id='number-menu']//div", "10");
@@ -155,26 +155,30 @@ public class Topic_08_Dropdown_Custom {
 	}
 
 	@Test
-	public void TC_08_Multiple_Select() {		
+	public void TC_08_Multiple_Select() {
 		driver.get("https://multiple-select.wenzhixin.net.cn/templates/template.html?v=189&url=basic.html");
-		
-		selectMultipleDropdownbyText("(//button[@class='ms-choice'])[1]", "(//div[@class='ms-drop bottom'])[1]//li//span", threeMonths);
+
+		selectMultipleDropdownbyText("(//button[@class='ms-choice'])[1]",
+				"(//div[@class='ms-drop bottom'])[1]//li//span", threeMonths);
 		Assert.assertTrue(areItemSelected(threeMonths));
-		
+
 		sleepInSeconds(1);
 		driver.navigate().refresh();
-		selectMultipleDropdownbyText("(//button[@class='ms-choice'])[1]", "(//div[@class='ms-drop bottom'])[1]//li//span", fourMonths);
+		selectMultipleDropdownbyText("(//button[@class='ms-choice'])[1]",
+				"(//div[@class='ms-drop bottom'])[1]//li//span", fourMonths);
 		Assert.assertTrue(areItemSelected(fourMonths));
-		
+
 		sleepInSeconds(1);
 		driver.navigate().refresh();
-		selectMultipleDropdownbyText("(//button[@class='ms-choice'])[1]", "(//div[@class='ms-drop bottom'])[1]//li//span", twelthMonths);
+		selectMultipleDropdownbyText("(//button[@class='ms-choice'])[1]",
+				"(//div[@class='ms-drop bottom'])[1]//li//span", twelthMonths);
 		Assert.assertTrue(areItemSelected(twelthMonths));
-		
+
 		sleepInSeconds(1);
 		driver.navigate().refresh();
-		selectMultipleDropdownbyText("(//button[@class='ms-choice'])[1]", "(//div[@class='ms-drop bottom'])[1]//li//span", wrongmonths);
-		Assert.assertFalse(areItemSelected(wrongmonths));	
+		selectMultipleDropdownbyText("(//button[@class='ms-choice'])[1]",
+				"(//div[@class='ms-drop bottom'])[1]//li//span", wrongmonths);
+		Assert.assertFalse(areItemSelected(wrongmonths));
 
 	}
 
@@ -206,12 +210,12 @@ public class Topic_08_Dropdown_Custom {
 
 	public void selectMultipleDropdownbyText(String parentXpath, String allItemsXpath, String[] months) {
 		driver.findElement(By.xpath(parentXpath)).click();
-		sleepInSeconds(1);		
+		sleepInSeconds(1);
 		List<WebElement> allOptionitems = explicitWait
 				.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(allItemsXpath)));
-		
+
 		for (String month : months) {
-			
+
 			for (WebElement item : allOptionitems) {
 				if (item.getText().equals(month)) {
 					item.click();
@@ -247,32 +251,37 @@ public class Topic_08_Dropdown_Custom {
 	}
 
 	public String getAngularSelectedText(String textCssLocator) {
-		return (String) jsExecutor.executeScript("return document.querySelector(\"" + textCssLocator + "\").text", textCssLocator);
+		return (String) jsExecutor.executeScript("return document.querySelector(\"" + textCssLocator + "\").text",
+				textCssLocator);
 	}
-	
+
 	public boolean areItemSelected(String[] months) {
 		List<WebElement> allselectedItems = driver.findElements(By.xpath("//li[@class='selected']//input"));
 		int numberOfselectedItems = allselectedItems.size();
-		
-		String selectedItemsText = driver.findElement(By.xpath("(//div[@class='ms-parent multiple-select'])[1]//button//span")).getText();
-		
-		if(numberOfselectedItems >0 && numberOfselectedItems <=3) {
+
+		String selectedItemsText = driver
+				.findElement(By.xpath("(//div[@class='ms-parent multiple-select'])[1]//button//span")).getText();
+
+		if (numberOfselectedItems > 0 && numberOfselectedItems <= 3) {
 			boolean status = true;
 			for (String month : months) {
-				if(!selectedItemsText.contains(month)) {
+				if (!selectedItemsText.contains(month)) {
 					status = false;
 					return status;
 				}
 			}
 			return status;
-		}else if(numberOfselectedItems >3 && numberOfselectedItems <12) {
-			return driver.findElement(By.xpath("//button[@class='ms-choice']//span[text()='" + numberOfselectedItems+ " of 12 selected']")).isDisplayed();
-		}else if (numberOfselectedItems >=12) {
-			return driver.findElement(By.xpath("//button[@class='ms-choice']//span[text()='All selected']")).isDisplayed();
-		}else {
+		} else if (numberOfselectedItems > 3 && numberOfselectedItems < 12) {
+			return driver.findElement(By
+					.xpath("//button[@class='ms-choice']//span[text()='" + numberOfselectedItems + " of 12 selected']"))
+					.isDisplayed();
+		} else if (numberOfselectedItems >= 12) {
+			return driver.findElement(By.xpath("//button[@class='ms-choice']//span[text()='All selected']"))
+					.isDisplayed();
+		} else {
 			return false;
 		}
-			
+
 	}
 
 	public void sleepInSeconds(long second) {

@@ -29,11 +29,11 @@ public class Topic_17_WaitIV_ExplicitWait {
 		driver.findElement(By.xpath("//input[@ng-model='first']")).sendKeys("5");
 		driver.findElement(By.xpath("//input[@ng-model='second']")).sendKeys("6");
 		driver.findElement(By.id("gobutton")).click();
-		
+
 		explicitWait = new WebDriverWait(driver, 2);
-		//Visible
+		// Visible
 		explicitWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h2[text()='11']")));
-		
+
 		Assert.assertEquals(driver.findElement(By.xpath("//h2[@class='ng-binding']")).getText(), "11");
 	}
 
@@ -44,11 +44,11 @@ public class Topic_17_WaitIV_ExplicitWait {
 		driver.findElement(By.xpath("//input[@ng-model='first']")).sendKeys("5");
 		driver.findElement(By.xpath("//input[@ng-model='second']")).sendKeys("6");
 		driver.findElement(By.id("gobutton")).click();
-		
+
 		explicitWait = new WebDriverWait(driver, 1);
-		//Visible
+		// Visible
 		explicitWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h2[text()='11']")));
-		
+
 		Assert.assertEquals(driver.findElement(By.xpath("//h2[@class='ng-binding']")).getText(), "11");
 	}
 
@@ -59,12 +59,13 @@ public class Topic_17_WaitIV_ExplicitWait {
 		driver.findElement(By.xpath("//input[@ng-model='first']")).sendKeys("5");
 		driver.findElement(By.xpath("//input[@ng-model='second']")).sendKeys("6");
 		driver.findElement(By.id("gobutton")).click();
-		
+
 		explicitWait = new WebDriverWait(driver, 6);
-		//Visible
+		// Visible
 		explicitWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h2[text()='11']")));
-		
-		Assert.assertEquals(driver.findElement(By.xpath("//h2[@class='ng-binding']")).getText(), "11");;
+
+		Assert.assertEquals(driver.findElement(By.xpath("//h2[@class='ng-binding']")).getText(), "11");
+		;
 	}
 
 	@AfterClass

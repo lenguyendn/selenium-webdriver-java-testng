@@ -63,8 +63,9 @@ public class Topic_11_User_Interaction_Part_I {
 	public void TC_04_Click_And_Select_Element() {
 		driver.get("https://automationfc.github.io/jquery-selectable/");
 		List<WebElement> listNumber = driver.findElements(By.xpath("//li[@class='ui-state-default ui-selectee']"));
-		//click on 4, 11, 1, 9
-		action.keyDown(Keys.CONTROL).click(listNumber.get(3)).click(listNumber.get(10)).click(listNumber.get(0)).click(listNumber.get(8)).perform();
+		// click on 4, 11, 1, 9
+		action.keyDown(Keys.CONTROL).click(listNumber.get(3)).click(listNumber.get(10)).click(listNumber.get(0))
+				.click(listNumber.get(8)).perform();
 		action.keyUp(Keys.CONTROL).perform();
 		sleepInSeconds(2);
 		List<WebElement> listSelectedNumber = driver.findElements(By.cssSelector(".ui-selected"));
@@ -76,8 +77,8 @@ public class Topic_11_User_Interaction_Part_I {
 		driver.get("https://automationfc.github.io/basic-form/index.html");
 		action.doubleClick(driver.findElement(By.xpath("//button[text()='Double click me']"))).perform();
 		sleepInSeconds(1);
-		Assert.assertEquals(driver.findElement(By.xpath("//p[@id='demo']")).getText(), "Hello Automation Guys!");	
-		
+		Assert.assertEquals(driver.findElement(By.xpath("//p[@id='demo']")).getText(), "Hello Automation Guys!");
+
 	}
 
 	public void sleepInSeconds(long timeout) {

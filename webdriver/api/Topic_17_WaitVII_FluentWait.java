@@ -35,7 +35,7 @@ public class Topic_17_WaitVII_FluentWait {
 	public void TC_01_Fluent() {
 		driver.get("https://automationfc.github.io/dynamic-loading/");
 		getwaitedWebElement(By.xpath("//div[@id='start']/button")).click();
-		
+
 		waitforElementAndIsDisplay(By.xpath("//h4[text()='Hello World!']"));
 	}
 
@@ -44,65 +44,57 @@ public class Topic_17_WaitVII_FluentWait {
 		driver.get("https://automationfc.github.io/fluent-wait/");
 		WebElement countdown = driver.findElement(By.id("javascript_countdown_time"));
 		fluentElement = new FluentWait<WebElement>(countdown);
-		fluentElement.withTimeout(Duration.ofMinutes(15))
-					 .pollingEvery(Duration.ofMillis(interval))
-					 .ignoring(NoSuchElementException.class)
-					 .until(new Function<WebElement, Boolean>(){
-						 public Boolean apply(WebElement element) {
-							 boolean flag = element.getText().endsWith("00");
-							 System.out.println("Time= " + element.getText());
-							 return flag;
-						 }
-					 });
+		fluentElement.withTimeout(Duration.ofMinutes(15)).pollingEvery(Duration.ofMillis(interval))
+				.ignoring(NoSuchElementException.class).until(new Function<WebElement, Boolean>() {
+					public Boolean apply(WebElement element) {
+						boolean flag = element.getText().endsWith("00");
+						System.out.println("Time= " + element.getText());
+						return flag;
+					}
+				});
 	}
 
-	
 	public WebElement getwaitedWebElement(By locator) {
 		FluentWait<WebDriver> wait = new FluentWait<WebDriver>(driver);
-		
-		wait.withTimeout(Duration.ofSeconds(timeout))
-			.pollingEvery(Duration.ofMillis(interval))
-			.ignoring(NoSuchElementException.class);
-		
-		WebElement element = wait.until(new Function<WebDriver, WebElement>(){
+
+		wait.withTimeout(Duration.ofSeconds(timeout)).pollingEvery(Duration.ofMillis(interval))
+				.ignoring(NoSuchElementException.class);
+
+		WebElement element = wait.until(new Function<WebDriver, WebElement>() {
 			public WebElement apply(WebDriver driver) {
 				return driver.findElement(locator);
 			}
 		});
 		return element;
 	}
-	
+
 	public void waitForElementAndClick(By locator) {
 		FluentWait<WebDriver> wait = new FluentWait<WebDriver>(driver);
 
-		wait.withTimeout(Duration.ofSeconds(timeout))
-			.pollingEvery(Duration.ofMillis(interval))
-			.ignoring(NoSuchElementException.class);
-		
-		WebElement element = wait.until(new Function<WebDriver, WebElement>(){
+		wait.withTimeout(Duration.ofSeconds(timeout)).pollingEvery(Duration.ofMillis(interval))
+				.ignoring(NoSuchElementException.class);
+
+		WebElement element = wait.until(new Function<WebDriver, WebElement>() {
 			public WebElement apply(WebDriver driver) {
 				return driver.findElement(locator);
 			}
 		});
 		element.click();
 	}
-	
+
 	public boolean waitforElementAndIsDisplay(By locator) {
 		WebElement element = getwaitedWebElement(locator);
-		FluentWait<WebElement> wait = new FluentWait<WebElement>(element)
-							.withTimeout(Duration.ofSeconds(timeout))
-							.pollingEvery(Duration.ofMillis(interval))
-							.ignoring(NoSuchElementException.class);
-		
-		boolean isDisplayed = wait.until(new Function<WebElement, Boolean>(){
+		FluentWait<WebElement> wait = new FluentWait<WebElement>(element).withTimeout(Duration.ofSeconds(timeout))
+				.pollingEvery(Duration.ofMillis(interval)).ignoring(NoSuchElementException.class);
+
+		boolean isDisplayed = wait.until(new Function<WebElement, Boolean>() {
 			public Boolean apply(WebElement element) {
 				boolean flag = element.isDisplayed();
 				return flag;
 			}
 		});
-		return isDisplayed;				
+		return isDisplayed;
 	}
-	
 
 	@AfterClass
 	public void afterClass() {

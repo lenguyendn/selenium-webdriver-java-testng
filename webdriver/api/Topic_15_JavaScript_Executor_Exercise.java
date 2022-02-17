@@ -45,7 +45,7 @@ public class Topic_15_JavaScript_Executor_Exercise {
 		sleepInSeconds(1);
 		Assert.assertTrue(driver.findElement(By.xpath("//h1[text()='Mobile']")).isDisplayed());
 
-		// Add samsung vao cart		
+		// Add samsung vao cart
 		clickToElementByJS(
 				"//a[text()='Samsung Galaxy']//parent::h2//following-sibling::div[@class='actions']//button");
 		sleepInSeconds(3);
@@ -80,7 +80,6 @@ public class Topic_15_JavaScript_Executor_Exercise {
 		Assert.assertEquals(domainTwo, "demo.guru99.com");
 	}
 
-	
 	public void TC_02_Verify_HTML5_Validation_Message() {
 		driver.get("https://automationfc.github.io/html5/index.html");
 		sleepInSeconds(2);
@@ -130,13 +129,14 @@ public class Topic_15_JavaScript_Executor_Exercise {
 	@Test
 	public void TC_03_Verify_HTML5_Validation_MessageII() {
 		navigateToUrlByJS("https://login.ubuntu.com");
-		
-		//close dialog		
+
+		// close dialog
 		if (driver.findElements(By.xpath("//div[@class='p-modal__dialog']")).size() >= 1) {
-			//close popup
+			// close popup
 			driver.findElement(By.xpath("//button[@id='cookie-policy-button-accept']")).click();
 			sleepInSeconds(3);
-			//Assert.assertEquals(driver.findElements(By.id("//div[@class='p-modal__dialog']")).size(), 0);
+			// Assert.assertEquals(driver.findElements(By.id("//div[@class='p-modal__dialog']")).size(),
+			// 0);
 		}
 		driver.findElement(By.xpath("//input[@type='email']")).sendKeys("a");
 		sleepInSeconds(2);
@@ -144,12 +144,12 @@ public class Topic_15_JavaScript_Executor_Exercise {
 		sleepInSeconds(1);
 		Assert.assertEquals(getElementValidationMessage("//input[@type='email']"), "Please enter an email address.");
 		sleepInSeconds(1);
-		
+
 		navigateToUrlByJS("https://sieuthimaymocthietbi.com/account/register");
 		driver.findElement(By.xpath("//div[@class='form-signup clearfix']//button[@type='submit']")).click();
 		sleepInSeconds(1);
 		Assert.assertEquals(getElementValidationMessage("//input[@id='lastName']"), "Please fill out this field.");
-		
+
 	}
 
 	public String getElementValidationMessage(String locator) {
@@ -177,7 +177,7 @@ public class Topic_15_JavaScript_Executor_Exercise {
 				.executeScript("return document.documentElement.innerText.match('" + textExpected + "')[0];");
 		return textActual.equals(textExpected);
 	}
-	
+
 	public void navigateToUrlByJS(String url) {
 		jsExecutor.executeScript("window.location = '" + url + "'");
 	}

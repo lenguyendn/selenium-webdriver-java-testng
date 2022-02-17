@@ -20,12 +20,12 @@ public class Topic_07_Multiple_Parallel {
 	By emailTextBox = By.xpath("//*[@id='email']");
 	By passwordTextBox = By.xpath("//*[@id='pass']");
 	By loginButton = By.xpath("//*[@id='send2']");
-	
+
 	@Parameters("browser")
 	@BeforeClass
-	//optional : chi khi khong tim thay browser nao trong xml file
+	// optional : chi khi khong tim thay browser nao trong xml file
 	public void beforeClass(@Optional("firefox") String browserName) {
-		if(browserName.equals("firefox")) {
+		if (browserName.equals("firefox")) {
 			System.setProperty("webdriver.gecko.driver", ".\\browserDrivers\\geckodriver.exe");
 			driver = new FirefoxDriver();
 		} else if (browserName.equals("chrome")) {
@@ -37,7 +37,7 @@ public class Topic_07_Multiple_Parallel {
 		} else {
 			throw new RuntimeException("The browser name is not correct");
 		}
-		
+
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 	}
@@ -45,23 +45,21 @@ public class Topic_07_Multiple_Parallel {
 	@Test(dataProvider = "user_pass")
 	public void TC_Login(String username, String password) {
 		driver.get("http://live.demoguru99.com/index.php/customer/account/login/");
-		
+
 		driver.findElement(emailTextBox).sendKeys(username);
 		driver.findElement(passwordTextBox).sendKeys(password);
 		driver.findElement(loginButton).click();
-		
+
 		Assert.assertTrue(driver.findElement(By.xpath("//div[@class='col-1']//p")).getText().contains(username));
 		driver.findElement(By.xpath("//header[@id='header']//span[text()='Account']")).click();
 		driver.findElement(By.xpath("//a[text()='Log Out']")).click();
 	}
 
 	@DataProvider(name = "user_pass")
-	public Object[][] UserAndPasswordData(){
-		return new Object[][] {
-			{"selenium_11_01@gmail.com", "111111"}
-		};
+	public Object[][] UserAndPasswordData() {
+		return new Object[][] { { "selenium_11_01@gmail.com", "111111" } };
 	}
-	
+
 	@AfterClass(alwaysRun = true)
 	public void afterClass() {
 		driver.quit();

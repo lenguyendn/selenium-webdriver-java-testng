@@ -27,7 +27,7 @@ public class Topic_14_Windows_Tabs {
 		sleepInSecond(2);
 		// get window handle
 		String kynaID = driver.getWindowHandle();
-		
+
 		// close popup if any
 		if (driver.findElements(By.xpath("//div[@class='fancybox-outer']")).size() >= 1) {
 			// close popup
@@ -109,7 +109,7 @@ public class Topic_14_Windows_Tabs {
 		Assert.assertEquals(driver.getCurrentUrl(), "https://kyna.vn/");
 		String KynaID = driver.getWindowHandle();
 		System.out.println("KynaID: " + KynaID);
-		
+
 		Set<String> allIDs = driver.getWindowHandles();
 		for (String id : allIDs) {
 			System.out.println(id);

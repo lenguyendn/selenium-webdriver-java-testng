@@ -48,9 +48,10 @@ public class Topic_17_WaitV_Exercise_ExplicitWait {
 
 		sleepInSeconds(2);
 		// close cookie banner
-		explicitWait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='onetrust-accept-btn-handler']")));
+		explicitWait.until(
+				ExpectedConditions.elementToBeClickable(By.xpath("//button[@id='onetrust-accept-btn-handler']")));
 		driver.findElement(By.xpath("//button[@id='onetrust-accept-btn-handler']")).click();
-		
+
 		// select current date
 		List<WebElement> days = driver.findElements(By.xpath("//div[@class='calendarContainer']//tbody//a"));
 		for (WebElement day : days) {
@@ -62,7 +63,8 @@ public class Topic_17_WaitV_Exercise_ExplicitWait {
 		}
 
 		// Wait til AJAX Loading invisible
-		explicitWait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[not(@style='display:none,')]/div[@class='raDiv']")));
+		explicitWait.until(ExpectedConditions
+				.invisibilityOfElementLocated(By.xpath("//div[not(@style='display:none,')]/div[@class='raDiv']")));
 
 		// verify ngay da chon
 		Assert.assertTrue(driver.findElement(By.xpath("//div[@class='RadAjaxPanel']/span")).getText()
@@ -74,18 +76,21 @@ public class Topic_17_WaitV_Exercise_ExplicitWait {
 	@Test
 	public void TC_02_ExplicitWait() {
 		driver.get("https://filebin.net/");
-		
-		WebElement upload = explicitWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@type='file']")));
+
+		WebElement upload = explicitWait
+				.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@type='file']")));
 		upload.sendKeys(photo1path + "\n" + photo2path);
-		
+
 		explicitWait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@class='progress']")));
-		
-		explicitWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[text()='"+ photo1FileName +"']")));
-		explicitWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[text()='"+ photo2FileName +"']")));
-		
-		Assert.assertTrue(driver.findElement(By.xpath("//a[text()='"+ photo1FileName +"']")).isDisplayed());
-		Assert.assertTrue(driver.findElement(By.xpath("//a[text()='"+ photo2FileName +"']")).isDisplayed());	
-		
+
+		explicitWait
+				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[text()='" + photo1FileName + "']")));
+		explicitWait
+				.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[text()='" + photo2FileName + "']")));
+
+		Assert.assertTrue(driver.findElement(By.xpath("//a[text()='" + photo1FileName + "']")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//a[text()='" + photo2FileName + "']")).isDisplayed());
+
 	}
 
 	public String getDayToday() {
@@ -100,7 +105,6 @@ public class Topic_17_WaitV_Exercise_ExplicitWait {
 		return dateFormat.format(date);
 	}
 
-	
 	public void sleepInSeconds(long timeout) {
 		try {
 			Thread.sleep(timeout * 1000);
@@ -109,7 +113,7 @@ public class Topic_17_WaitV_Exercise_ExplicitWait {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public String getFileSeparator() { // tu detect he dieu hanh de lay separator
 		return File.separator;
 	}

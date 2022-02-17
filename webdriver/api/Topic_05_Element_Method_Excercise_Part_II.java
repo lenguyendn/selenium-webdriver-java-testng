@@ -1,7 +1,5 @@
 package api;
 
-
-
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -22,51 +20,50 @@ public class Topic_05_Element_Method_Excercise_Part_II {
 	By slider1 = By.id("slider-1");
 	By slider2 = By.id("slider-2");
 	By javaLanguageCheckbox = By.xpath("//input[@id='java']");
-	
-	public boolean isElementDisplayed(By by){
+
+	public boolean isElementDisplayed(By by) {
 		WebElement element = driver.findElement(by);
-		if(element.isDisplayed()) {
-			System.out.println(by+" is displayed");
+		if (element.isDisplayed()) {
+			System.out.println(by + " is displayed");
 			return true;
-		}else {
-			System.out.println(by +" is not displayed");
+		} else {
+			System.out.println(by + " is not displayed");
 			return false;
 		}
 	}
-	
-	public boolean isElementEnabled(By by){
+
+	public boolean isElementEnabled(By by) {
 		WebElement element = driver.findElement(by);
-		if(element.isEnabled()) {
-			System.out.println(by+" is enabled");
+		if (element.isEnabled()) {
+			System.out.println(by + " is enabled");
 			return true;
-		}else {
-			System.out.println(by +" is disabled");
+		} else {
+			System.out.println(by + " is disabled");
 			return false;
 		}
 	}
-	
-	public boolean isElementSelected(By by){
+
+	public boolean isElementSelected(By by) {
 		WebElement element = driver.findElement(by);
-		if(element.isSelected()) {
-			System.out.println(by+" is selected");
+		if (element.isSelected()) {
+			System.out.println(by + " is selected");
 			return true;
-		}else {
-			System.out.println(by +" is not selected");
+		} else {
+			System.out.println(by + " is not selected");
 			return false;
 		}
 	}
-	
+
 	public void sendkeyToElement(By by, String value) {
 		WebElement element = driver.findElement(by);
 		element.clear();
 		element.sendKeys(value);
 	}
-	
+
 	public void clickToElement(By by) {
 		driver.findElement(by).click();
 	}
-	
-	
+
 	@BeforeClass
 	public void BeforeClass() {
 		driver = new FirefoxDriver();
@@ -74,51 +71,50 @@ public class Topic_05_Element_Method_Excercise_Part_II {
 		driver.get("https://automationfc.github.io/basic-form/index.html");
 		driver.manage().window().maximize();
 	}
-	
+
 	@Test
 	public void TC_01_isDisplayed() {
-		if(isElementDisplayed(emailTextBox)) {
+		if (isElementDisplayed(emailTextBox)) {
 			sendkeyToElement(emailTextBox, "Automation Testing");
 		}
-		
-		if(isElementDisplayed(ageUnder18Radio)) {
+
+		if (isElementDisplayed(ageUnder18Radio)) {
 			clickToElement(ageUnder18Radio);
 		}
-		
-		if(isElementDisplayed(educationTextarea)) {
+
+		if (isElementDisplayed(educationTextarea)) {
 			sendkeyToElement(educationTextarea, "Automation Testing");
 		}
-		
+
 		Assert.assertFalse(isElementDisplayed(user5Text));
 	}
-	
+
 	@Test
 	public void TC_02_isEnabled() {
 		driver.get("https://automationfc.github.io/basic-form/index.html");
-		
+
 		Assert.assertTrue(isElementEnabled(slider1));
 		Assert.assertFalse(isElementEnabled(slider2));
 	}
-	
+
 	@Test
 	public void TC_03_isSelected() {
 		driver.get("https://automationfc.github.io/basic-form/index.html");
-		
+
 		clickToElement(ageUnder18Radio);
-		clickToElement(javaLanguageCheckbox);		
+		clickToElement(javaLanguageCheckbox);
 		Assert.assertTrue(isElementSelected(ageUnder18Radio));
 		Assert.assertTrue(isElementSelected(javaLanguageCheckbox));
-		
+
 		clickToElement(ageUnder18Radio);
 		clickToElement(javaLanguageCheckbox);
 		Assert.assertTrue(isElementSelected(ageUnder18Radio));
 		Assert.assertFalse(isElementSelected(javaLanguageCheckbox));
 	}
-	
-	
+
 	@AfterClass
 	public void AfterClass() {
 		driver.quit();
 	}
-	
+
 }

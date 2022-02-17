@@ -197,7 +197,7 @@ public class Topic_16_Upload_File {
 		sleepInSeconds(1);
 
 		// load file = AutoIT
-		//file mutiple Firefox cua thay khong nhan duoc Enter(?)
+		// file mutiple Firefox cua thay khong nhan duoc Enter(?)
 		System.out.println(driver.toString());
 		if (driver.toString().contains("chrome")) {
 			Runtime.getRuntime().exec(new String[] { UploadMutipleChromeAutoIT, photo1path, photo2path });
@@ -224,9 +224,9 @@ public class Topic_16_Upload_File {
 
 		driver.quit();
 	}
-	
+
 	@Test
-	public void TC_06_Upload_One_File_Robot() throws AWTException{
+	public void TC_06_Upload_One_File_Robot() throws AWTException {
 		// voi Mac phai set permission cho chromedriver
 		if (osName.contains("Windows")) {
 			System.setProperty("webdriver.gecko.driver", projectLocation + "\\browserDrivers\\geckodriver.exe");
@@ -242,29 +242,29 @@ public class Topic_16_Upload_File {
 		driver.findElement(By.cssSelector(".fileinput-button")).click();
 		sleepInSeconds(1);
 
-		// load file = Robot		
-		//Specify the file location with extension
+		// load file = Robot
+		// Specify the file location with extension
 		StringSelection select = new StringSelection(photo1path);
-		
-		//Copy to clipboard
+
+		// Copy to clipboard
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(select, null);
-		
+
 		Robot robot = new Robot();
 		sleepInSeconds(1);
-		
-		//Nhan phim Enter
+
+		// Nhan phim Enter
 		robot.keyPress(KeyEvent.VK_ENTER);
 		robot.keyRelease(KeyEvent.VK_ENTER);
-		
-		//Nhan xuong Ctrl - V
+
+		// Nhan xuong Ctrl - V
 		robot.keyPress(KeyEvent.VK_CONTROL);
 		robot.keyPress(KeyEvent.VK_V);
-		
-		//Nha Ctrl - V
+
+		// Nha Ctrl - V
 		robot.keyRelease(KeyEvent.VK_CONTROL);
 		robot.keyRelease(KeyEvent.VK_V);
-		
-		//Nhan Enter
+
+		// Nhan Enter
 		robot.keyPress(KeyEvent.VK_ENTER);
 		robot.keyRelease(KeyEvent.VK_ENTER);
 		sleepInSeconds(2);

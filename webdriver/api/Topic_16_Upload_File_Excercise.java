@@ -40,7 +40,8 @@ public class Topic_16_Upload_File_Excercise {
 		sleepInSeconds(10);
 
 		// Verify Upload
-		Assert.assertTrue(driver.findElement(By.xpath("//h5[text()='Your files have been successfully uploaded']")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//h5[text()='Your files have been successfully uploaded']"))
+				.isDisplayed());
 
 		// Click download link
 		driver.findElement(By.cssSelector("#rowUploadSuccess-downloadPage")).click();
@@ -48,10 +49,16 @@ public class Topic_16_Upload_File_Excercise {
 		// Switch to new tab
 		switchToTheOtherWindowInTwoWindows(beforeUploadPage);
 		sleepInSeconds(2);
-		
-		//Verify file download exist
-		Assert.assertTrue(driver.findElement(By.xpath("//a[contains(@href, '"+ photo1FileName + "')]//span[text()='"+ photo1FileName+ "']")).isDisplayed());
-		Assert.assertTrue(driver.findElement(By.xpath("//a[contains(@href, '"+ photo2FileName + "')]//span[text()='"+ photo2FileName+ "']")).isDisplayed());
+
+		// Verify file download exist
+		Assert.assertTrue(driver
+				.findElement(By
+						.xpath("//a[contains(@href, '" + photo1FileName + "')]//span[text()='" + photo1FileName + "']"))
+				.isDisplayed());
+		Assert.assertTrue(driver
+				.findElement(By
+						.xpath("//a[contains(@href, '" + photo2FileName + "')]//span[text()='" + photo2FileName + "']"))
+				.isDisplayed());
 	}
 
 	public void sleepInSeconds(long timeout) {
@@ -70,14 +77,14 @@ public class Topic_16_Upload_File_Excercise {
 	public void switchToTheOtherWindowInTwoWindows(String windowID) {
 		Set<String> allID = driver.getWindowHandles();
 		for (String id : allID) {
-			if(!id.equals(windowID)) {
+			if (!id.equals(windowID)) {
 				driver.switchTo().window(id);
 				sleepInSeconds(2);
 				break;
 			}
 		}
 	}
-	
+
 	@AfterClass
 	public void afterClass() {
 		driver.quit();

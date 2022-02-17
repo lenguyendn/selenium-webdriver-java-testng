@@ -16,7 +16,7 @@ public class Topic_06_Data_Provider {
 	By emailTextBox = By.xpath("//*[@id='email']");
 	By passwordTextBox = By.xpath("//*[@id='pass']");
 	By loginButton = By.xpath("//*[@id='send2']");
-	
+
 	@BeforeClass
 	public void beforeClass() {
 		System.setProperty("webdriver.chrome.driver", ".\\browserDrivers\\chromedriver.exe");
@@ -28,25 +28,22 @@ public class Topic_06_Data_Provider {
 	@Test(dataProvider = "user_pass")
 	public void TC_Login(String username, String password) {
 		driver.get("http://live.demoguru99.com/index.php/customer/account/login/");
-		
+
 		driver.findElement(emailTextBox).sendKeys(username);
 		driver.findElement(passwordTextBox).sendKeys(password);
 		driver.findElement(loginButton).click();
-		
+
 		Assert.assertTrue(driver.findElement(By.xpath("//div[@class='col-1']//p")).getText().contains(username));
 		driver.findElement(By.xpath("//header[@id='header']//span[text()='Account']")).click();
 		driver.findElement(By.xpath("//a[text()='Log Out']")).click();
 	}
 
 	@DataProvider(name = "user_pass")
-	public Object[][] UserAndPasswordData(){
-		return new Object[][] {
-			{"selenium_11_01@gmail.com", "111111"},
-			{"selenium_11_02@gmail.com", "111111"},
-			{"selenium_11_03@gmail.com", "111111"},
-		};
+	public Object[][] UserAndPasswordData() {
+		return new Object[][] { { "selenium_11_01@gmail.com", "111111" }, { "selenium_11_02@gmail.com", "111111" },
+				{ "selenium_11_03@gmail.com", "111111" }, };
 	}
-	
+
 	@AfterClass(alwaysRun = true)
 	public void afterClass() {
 		driver.quit();

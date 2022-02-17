@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 
 public class Topic_08_Loop {
 	WebDriver driver;
-	
+
 	@BeforeClass
 	public void beforeClass() {
 		System.setProperty("webdriver.chrome.driver", ".\\browserDrivers\\chromedriver.exe");
@@ -24,20 +24,20 @@ public class Topic_08_Loop {
 	@Test(invocationCount = 5)
 	public void TC_Register() {
 		driver.get("http://live.demoguru99.com/index.php/customer/account/create/");
-		
+
 		driver.findElement(By.id("firstname")).sendKeys("Le");
 		driver.findElement(By.id("lastname")).sendKeys("Nguyen");
-		
+
 		String email = generateEmail();
 		System.out.println("Email address: " + email);
 		String password = String.valueOf(generateEPassword());
 		System.out.println("Password: " + password);
-		
+
 		driver.findElement(By.id("email_address")).sendKeys(email);
 		driver.findElement(By.id("password")).sendKeys(password);
 		driver.findElement(By.id("confirmation")).sendKeys(password);
 		driver.findElement(By.xpath("//button[@title='Register']")).click();
-		
+
 		driver.findElement(By.xpath("//header[@id='header']//span[text()='Account']")).click();
 		driver.findElement(By.xpath("//a[text()='Log Out']")).click();
 	}
@@ -46,12 +46,12 @@ public class Topic_08_Loop {
 		Random rand = new Random();
 		return "automationfc" + rand.nextInt(99999) + "@gmail.com";
 	}
-	
+
 	public int generateEPassword() {
 		Random rand = new Random();
 		return rand.nextInt(999999999);
 	}
-	
+
 	@AfterClass(alwaysRun = true)
 	public void afterClass() {
 		driver.quit();
