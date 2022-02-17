@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="ProjectName" parallel="false">
+	<test name="Run test on CHROME">
+
+		<groups>
+			<run>
+				<include name="regression"></include>
+				<exclude name="regression 1"></exclude>
+			</run>
+		</groups>
+
+		<classes>
+			<class name="testNG.Topic_03_Group" />
+		</classes>
+	</test>
+</suite> 

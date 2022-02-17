@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Test on Mobile" parallel="false">
+  <test name="Test">
+    <classes>
+      <class name="webApp.Topic_01_Annotation"/>
+    </classes>
+  </test> 
+</suite> 

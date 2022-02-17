@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Tets on Web" parallel="false">
+  <test name="Test">
+  <listeners>
+  	<listener class-name ="testNG.TestNGListener"/>
+  </listeners>
+    <classes>
+      <class name="testNG.Topic_09_Dependency"/>
+    </classes>
+  </test> 
+</suite> 
